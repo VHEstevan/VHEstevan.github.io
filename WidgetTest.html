@@ -88,17 +88,17 @@
         <div class="service-container">
             <label for="service1" class="service-label">Service 1</label>
             <span class="service-price">COP 1000.00</span>
-            <input type="checkbox" class="service-checkbox" id="service1" data-price="1000">
+            <input type="checkbox" class="service-checkbox" id="service1" data-price="1000" onclick="calculateTotalAmount()">
         </div>
         <div class="service-container">
             <label for="service2" class="service-label">Service 2</label>
             <span class="service-price">COP 5000.00</span>
-            <input type="checkbox" class="service-checkbox" id="service2" data-price="5000">
+            <input type="checkbox" class="service-checkbox" id="service2" data-price="5000" onclick="calculateTotalAmount()">
         </div>
         <div class="service-container">
             <label for="service3" class="service-label">Service 3</label>
             <span class="service-price">COP 6000.00</span>
-            <input type="checkbox" class="service-checkbox" id="service3" data-price="6000">
+            <input type="checkbox" class="service-checkbox" id="service3" data-price="6000" onclick="calculateTotalAmount()">
         </div>
 
         <div id="totalAmount">Total: COP 0.00</div>
@@ -114,7 +114,7 @@
 
         <label for="amount">Amount:</label>
         <div style="position: relative;">
-            <input type="text" id="amount" placeholder="0.00" readonly>
+            <input type="text" id="amount" placeholder="Total" readonly>
         </div>
 
         <button type="button" onclick="makePayment()">Make Payment</button>
@@ -151,8 +151,6 @@
 
             // Update the total amount field
             document.getElementById('amount').value = "COP " + totalAmount.toFixed(2);
-
-            // Update the total amount text
             document.getElementById('totalAmount').innerText = "Total: COP " + totalAmount.toFixed(2);
 
             return totalAmount;
