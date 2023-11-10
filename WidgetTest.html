@@ -48,7 +48,7 @@
         }
 
         .service-checkbox {
-            margin-right: 8px;
+            margin-left: 8px;
         }
 
         button {
@@ -69,10 +69,10 @@
         .service-container {
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
 
         .service-label {
-            margin-bottom: 8px;
             margin-right: 8px;
         }
     </style>
@@ -82,16 +82,16 @@
     <form id="paymentForm">
         <!-- Include necessary input fields for payment -->
         <div class="service-container">
-            <input type="checkbox" class="service-checkbox" id="service1" data-price="1000">
             <label for="service1" class="service-label">Service 1 (COP 1000.00)</label>
+            <input type="checkbox" class="service-checkbox" id="service1" data-price="1000">
         </div>
         <div class="service-container">
-            <input type="checkbox" class="service-checkbox" id="service2" data-price="5000">
             <label for="service2" class="service-label">Service 2 (COP 5000.00)</label>
+            <input type="checkbox" class="service-checkbox" id="service2" data-price="5000">
         </div>
         <div class="service-container">
-            <input type="checkbox" class="service-checkbox" id="service3" data-price="6000">
             <label for="service3" class="service-label">Service 3 (COP 6000.00)</label>
+            <input type="checkbox" class="service-checkbox" id="service3" data-price="6000">
         </div>
 
         <div id="totalAmount">Total: COP 0.00</div>
@@ -118,37 +118,4 @@
         // Function to handle payment
         function makePayment() {
             // Retrieve user inputs
-            const cardNumber = document.getElementById('cardNumber').value;
-            const expiryDate = document.getElementById('expiryDate').value;
-            const cvv = document.getElementById('cvv').value;
-
-            // Calculate total amount based on selected services
-            const totalAmount = calculateTotalAmount();
-
-            // Call Upay API to process payment
-            // Example: upay.processPayment(cardNumber, expiryDate, cvv, totalAmount);
-
-            // Display success or error message to the user
-            // Example: showPaymentResult(response);
-        }
-
-        // Function to calculate total amount based on selected services
-        function calculateTotalAmount() {
-            const checkboxes = document.querySelectorAll('.service-checkbox');
-            let totalAmount = 0;
-
-            checkboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    totalAmount += parseFloat(checkbox.dataset.price);
-                }
-            });
-
-            // Update the total amount field
-            document.getElementById('amount').value = totalAmount.toFixed(2);
-
-            return totalAmount;
-        }
-    </script>
-
-</body>
-</html>
+            const cardNumber =
