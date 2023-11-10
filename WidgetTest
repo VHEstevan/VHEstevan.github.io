@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upay Payment Widget</title>
+    <style>
+        body {
+            background-color: #ffffff; /* White background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px; /* Adjusted width */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        input::before {
+            content: "COP ";
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .service-checkbox {
+            margin-right: 8px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #totalAmount {
+            margin-top: 16px;
+            font-weight: bold;
+        }
+
+        /* Adjusted style for checkboxes to be on the same line */
+        .service-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .service-label {
+            margin-bottom: 8px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="paymentForm">
+        <!-- Include necessary input fields for payment -->
+        <div class="service-container">
+            <input type="checkbox" class="service-checkbox" id="service1" data-price="1000">
+            <label for="service1" class="service-label">Service 1 (COP 1000.00)</label>
+        </div>
+        <div class="service-container">
+            <input type="checkbox" class="service-checkbox" id="service2" data-price="5000">
+            <label for="service2" class="service-label">Service 2 (COP 5000.00)</label>
+        </div>
+        <div class="service-container">
+            <input type="checkbox" class="service-checkbox" id="service3" data-price="6000">
+            <label for="service3" class="service-label">Service 3 (COP 6000.00)</label>
+        </div>
+
+        <div id="totalAmount">Total: COP 0.00</div>
+
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" id="expiryDate" placeholder="MM/YY" required>
+
+        <label for="cvv">CVV:</label>
+        <input type="number" id="cvv" placeholder="CVV" required>
+
+        <label for="amount">Amount:</label>
+        <div style="position: relative;">
+            <span style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); pointer-events: none;">COP </span>
+            <input type="text" id="amount" placeholder="0.00" readonly>
+        </div>
+
+        <button type="button" onclick="makePayment()">Make Payment</button>
+    </form>
+
+    <script>
+        // Function to handle payment
+        function makePayment() {
+            // Retrieve user inputs
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+
+            // Calculate total amount based on selected services
+            const totalAmount = calculateTotalAmount();
+
+            // Call Upay API to process payment
+            // Example: upay.processPayment(cardNumber, expiryDate, cvv, totalAmount);
+
+            // Display success or error message to the user
+            // Example: showPaymentResult(response);
+        }
+
+        // Function to calculate total amount based on selected services
+        function calculateTotalAmount() {
+            const checkboxes = document.querySelectorAll('.service-checkbox');
+            let totalAmount = 0;
+
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    totalAmount += parseFloat(checkbox.dataset.price);
+                }
+            });
+
+            // Update the total amount field
+            document.getElementById('amount').value = totalAmount.toFixed(2);
+
+            return totalAmount;
+        }
+    </script>
+
+</body>
+</html>
